@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Chapter 3 - Algorithms/Merge Sort/merge-sort/merge-sort.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

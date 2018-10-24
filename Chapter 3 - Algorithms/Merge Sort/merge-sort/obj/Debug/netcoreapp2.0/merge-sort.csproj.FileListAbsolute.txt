@@ -1,0 +1,11 @@
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\bin\Debug\netcoreapp2.0\merge-sort.deps.json
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\bin\Debug\netcoreapp2.0\merge-sort.runtimeconfig.json
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\bin\Debug\netcoreapp2.0\merge-sort.runtimeconfig.dev.json
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\bin\Debug\netcoreapp2.0\merge-sort.dll
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\bin\Debug\netcoreapp2.0\merge-sort.pdb
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.csprojAssemblyReference.cache
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.csproj.CoreCompileInputs.cache
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.AssemblyInfoInputs.cache
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.AssemblyInfo.cs
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.dll
+D:\Documents\Algorithms\Chapter 3 - Algorithms\Merge Sort\merge-sort\obj\Debug\netcoreapp2.0\merge-sort.pdb
