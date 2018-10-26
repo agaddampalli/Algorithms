@@ -664,30 +664,35 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\AbhiramReddy\\.nuget\\packages\\": {},
+    "C:\\Users\\ag105375\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documents\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
+      "projectUniqueName": "c:\\Abhiram\\MicroService\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
       "projectName": "merge-sort",
-      "projectPath": "D:\\Documents\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
-      "packagesPath": "C:\\Users\\AbhiramReddy\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\obj\\",
+      "projectPath": "c:\\Abhiram\\MicroService\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
+      "packagesPath": "C:\\Users\\ag105375\\.nuget\\packages\\",
+      "outputPath": "c:\\Abhiram\\MicroService\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\AbhiramReddy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ag105375\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
       ],
       "sources": {
+        "C:\\Abhiram\\Nuget": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "http://repo.aws.int/artifactory/api/nuget/nuget-release": {},
+        "http://repo.mitchell.com/api/nuget/dot-net-internal-repos": {},
+        "http://repo.mitchell.com/api/nuget/net-dev": {},
+        "http://repo.mitchell.com/api/nuget/net-release": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
