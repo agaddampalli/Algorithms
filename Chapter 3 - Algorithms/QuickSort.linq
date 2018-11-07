@@ -2,49 +2,102 @@
 
 public static void Main()
 {
-	var array = new int[]{10, 3, 20, 50, 30, 40, 90, 1};
-	
-	QuickSort(array, 0, array.Length-1);
-	
+	var array = new int[] { 10, -2, -1, -1, 0, -2, 1 };
+//	var array = new int[] { 10, 3, 30, 20, 40, 90, 1 };
+
+	QuickSort(array, 0, array.Length - 1);
+
 	array.Dump();
 }
 
 private static void QuickSort(int[] input, int lowestIndex, int highestIndex)
 {
-	while(lowestIndex < highestIndex)
+	if (lowestIndex < highestIndex)
 	{
-		var pivotIndex = Partition(input, lowestIndex, highestIndex);
-		
-		
-//		$"FirstLevel Sorting : LowIndex: {lowestIndex}; PivotIndex: {pivotIndex}; HighestIndex: {highestIndex};".Dump();
-		QuickSort(input, lowestIndex, pivotIndex-1);
-		
-//		$"Second Sorting : LowIndex: {lowestIndex}; PivotIndex: {pivotIndex}; HighestIndex: {highestIndex};".Dump();
-		QuickSort(input, pivotIndex+1, highestIndex);
+		var pivotIndex = PartitionFirst(input, lowestIndex, highestIndex);
+
+		QuickSort(input, lowestIndex, pivotIndex - 1);
+
+		QuickSort(input, pivotIndex + 1, highestIndex);
 	}
 }
 
-private static int Partition(int[] input, int lowestIndex, int highestIndex)
+private static int PartitionFirst(int[] input, int lowestIndex, int highestIndex)
+{
+	var pivot = input[lowestIndex];
+	int tmp = 0;
+	int startIndex = lowestIndex;
+
+	for (int i = lowestIndex + 1; i <= highestIndex; i++)
+	{
+		if (input[i] <= pivot)
+		{
+			startIndex++;
+			tmp = input[i];
+			input[i] = input[startIndex];
+			input[startIndex] = tmp;
+		}
+	}
+
+	tmp = input[startIndex];
+	input[startIndex] = input[lowestIndex];
+	input[lowestIndex] = tmp;
+
+	return startIndex;
+}
+
+private static int PartitionFirstLessPerformant(int[] input, int lowestIndex, int highestIndex)
 {
 	var pivot = input[lowestIndex];
 	var pivotIndex = lowestIndex;
-	int i = 0;
-	
-	for(int j= lowestIndex ; j <= highestIndex; j++)
+	int tmp = 0;
+	int startIndex = lowestIndex;
+	int j = 0;
+	int y = 0;
+
+	for (int i = lowestIndex + 1; i <= highestIndex; i++)
 	{
-		if(input[j] <= pivot)
+		if (input[i] <= pivot)
 		{
-			i++;
-			var tmp = input[j];
-			input[i] = tmp;
-			input[j] = pivot;
+			j = i;
+			y = i;
+			while (j > startIndex)
+			{
+				j--;
+				tmp = input[j];
+				input[j] = input[y];
+				input[y] = tmp;
+				y--;
+			}
+
+			startIndex++;
 		}
 	}
+
+	return startIndex;
+}
+
+private static int PartitionLast(int[] input, int lowestIndex, int highestIndex)
+{
+	var pivot = input[highestIndex];
+	int startIndex = lowestIndex-1;
+	int tmp =0;
 	
-	var temp = input[i];
-	input[pivotIndex] = temp;
-	input[i] = pivot;
-	
-	input.Dump();
-	return i;
+	//10, 3, 30, 20, 40, 90, 1
+	for (int i = lowestIndex ; i < highestIndex; i++)
+	{
+		if (input[i] <= pivot)
+		{
+			startIndex++;
+			tmp = input[i];
+			input[i] = input[startIndex];
+			input[startIndex] = tmp;
+		}
+	}
+
+	tmp = input[startIndex + 1];
+	input[startIndex + 1] = input[highestIndex];
+	input[highestIndex] = tmp;
+
+	return startIndex + 1;
 }
