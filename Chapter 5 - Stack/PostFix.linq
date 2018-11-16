@@ -2,9 +2,10 @@
 
 void Main()
 {
-	var exp = "a+b*(c^d-e)^(f+g*h)-i";
+	var exp = "2+3*(1^5-6)^(1+2*1)-2";
 	var postfixExpression = InfixToPostFix(exp);
-	EvaluatePostFix("231*+9-").Dump();
+	postfixExpression.Dump();
+	EvaluatePostFix(postfixExpression).Dump();
 }
 
 // Define other methods and classes here
@@ -62,8 +63,8 @@ private static int EvaluatePostFix(string exp)
 		if (operatorDictionary.ContainsKey(exp[i]))
 		{
 			var operatorValue = exp[i];
-			var value1 = result.Pop();
 			var value2 = result.Pop();
+			var value1 = result.Pop();
 			
 			var output = PerformOperation(operatorValue,value1,value2) ;
 			if(output != null)
@@ -73,7 +74,7 @@ private static int EvaluatePostFix(string exp)
 		}
 		else
 		{
-			result.Push(Char.GetNumericValue(exp[i]));
+			result.Push((int)Char.GetNumericValue(exp[i]));
 		}
 	}
 	
