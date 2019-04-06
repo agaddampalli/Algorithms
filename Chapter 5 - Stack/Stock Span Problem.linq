@@ -2,8 +2,10 @@
 
 void Main()
 {
-	var input = new int[]{100, 80, 60, 70, 60, 75, 85};
+	var input = new int[]{10, 4, 5, 90, 120, 80};
 	
+	var output = CalculateStockSpan(input);
+	output.Dump();
 }
 
 private static int[] CalculateStockSpan(int[] input)
@@ -30,13 +32,13 @@ private static int[] CalculateStockSpan(int[] input)
 
 private static void CalculateCount(Stack<int> valuesStack, int inputValue, int count, int[] output, int index)
 {
-	if(inputValue >= valuesStack.Peek())
+	if(!valuesStack.IsEmpty() && inputValue >= valuesStack.Peek())
 	{
 		var temp = valuesStack.Pop();
-		count++
+		count++;
+		output[index] = count;
 		CalculateCount(valuesStack, inputValue, count, output, index);
 		valuesStack.Push(temp);
-		output[index] = count;
 	}
 }
 

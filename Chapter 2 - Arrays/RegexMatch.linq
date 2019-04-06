@@ -23,32 +23,25 @@ public bool IsMatch(string s, string p)
 	}
 	
 	int i =0, j =0;
+	bool hasMatched = false;
 	var matchedStack = new Stack<char>();
+	var regexStack = new Stack<char>();
+	regexStack.Push(p[j]);
 	
-	while(j != p.Length)
+	while(regexStack.Count != 0 || i != s.Length)
 	{
-		if(p[j] =='*')
+		if(j < p.Length && p[j] == '*')
 		{
-			if(matchedStack.Count != 0 && matchedStack.Peek() ==  s[i])
-			{
-				i++;
-				j++;
-			}
-			else
-			{
-				j++;
-			}
+			regexStack.Push(p[j]);
 		}
-		else if (p[j] == '.' || p[j] == s[i])
+		
+		if(regexStack.Count != 0 && regexStack.Peek() == s[j])
 		{
-			matchedStack.Push(s[i]);
+			regexStack.Pop();
 			i++;
 			j++;
 		}
-		else
-		{
-			j++;
-		}
+		
 	}
 
 	return matchedStack.Count != 0;

@@ -1,14 +1,6 @@
 {
-  "ProjectFilePath": "c:\\Abhiram\\MicroService\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
+  "ProjectFilePath": "d:\\Documents\\Algorithms\\Chapter 3 - Algorithms\\Merge Sort\\merge-sort\\merge-sort.csproj",
   "TargetFramework": "netcoreapp2.0",
   "TagHelpers": [],
-  "Configuration": {
-    "ConfigurationName": "UnsupportedRazor",
-    "LanguageVersion": "1.0",
-    "Extensions": [
-      {
-        "ExtensionName": "UnsupportedRazorExtension"
-      }
-    ]
-  }
+  "Configuration": null
 }

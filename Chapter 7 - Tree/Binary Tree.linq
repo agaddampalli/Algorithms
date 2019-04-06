@@ -15,6 +15,8 @@ void Main()
 	
 	"***InOrder******".Dump();
 	binaryTree.Inorder(binaryTree.Root);
+	"***InOrder Stack******".Dump();
+	binaryTree.InorderWithStack(binaryTree.Root);
 	"***PreOrder******".Dump();
 	binaryTree.Preorder(binaryTree.Root);
 	"***PostOrder******".Dump();
@@ -83,6 +85,24 @@ public class BinaryTree<T>
 		leftSubtree.Data.Dump();
 		
 		Inorder(leftSubtree.RightNode);
+	}
+
+	public void InorderWithStack(Node<T> leftSubtree)
+	{
+		Stack<Node<T>> treeStack = new Stack<Node<T>>();
+		Node<T> current = leftSubtree;
+		while(current != null)
+		{
+			treeStack.Push(current);
+			current = current.LeftNode;
+			
+			while(current == null && treeStack.Count != 0)
+			{
+			 	current = treeStack.Pop();
+				current.Data.Dump();
+				current = current.RightNode;
+			}
+		}
 	}
 
 	public void Preorder(Node<T> root)
