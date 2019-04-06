@@ -2,6 +2,31 @@
 
 void Main()
 {
+	IsMatch("ab", ".*c").Dump();
+}
+
+public bool IsMatch(string s, string p)
+{
+	if(string.IsNullOrWhiteSpace(p))
+	{
+		return string.IsNullOrWhiteSpace(s);
+	}
+	
+	bool firstMatch = !string.IsNullOrWhiteSpace(s) && !string.IsNullOrWhiteSpace(p) && (s[0] == p[0] || p[0] == '.');
+	
+	if(p.Length >= 2 && p[1] == '*')
+	{
+		return (IsMatch(s, p.Substring(2)) || (firstMatch && IsMatch(s.Substring(1), p)));
+	}
+	else
+	{
+		return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
+	}
+}
+<Query Kind="Program" />
+
+void Main()
+{
 	IsMatch("aa", "a").Dump();
 }
 
@@ -23,25 +48,32 @@ public bool IsMatch(string s, string p)
 	}
 	
 	int i =0, j =0;
-	bool hasMatched = false;
 	var matchedStack = new Stack<char>();
-	var regexStack = new Stack<char>();
-	regexStack.Push(p[j]);
 	
-	while(regexStack.Count != 0 || i != s.Length)
+	while(j != p.Length)
 	{
-		if(j < p.Length && p[j] == '*')
+		if(p[j] =='*')
 		{
-			regexStack.Push(p[j]);
+			if(matchedStack.Count != 0 && matchedStack.Peek() ==  s[i])
+			{
+				i++;
+				j++;
+			}
+			else
+			{
+				j++;
+			}
 		}
-		
-		if(regexStack.Count != 0 && regexStack.Peek() == s[j])
+		else if (p[j] == '.' || p[j] == s[i])
 		{
-			regexStack.Pop();
+			matchedStack.Push(s[i]);
 			i++;
 			j++;
 		}
-		
+		else
+		{
+			j++;
+		}
 	}
 
 	return matchedStack.Count != 0;

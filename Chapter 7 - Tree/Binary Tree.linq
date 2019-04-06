@@ -8,8 +8,8 @@ void Main()
 	binaryTree.Root.RightNode = new Node<int>(3);
 	binaryTree.Root.LeftNode.LeftNode = new Node<int>(4);
 	binaryTree.Root.LeftNode.RightNode = new Node<int>(5);
-	binaryTree.Root.RightNode.LeftNode = new Node<int>(6);
-	binaryTree.Root.RightNode.RightNode = new Node<int>(7);
+//	binaryTree.Root.RightNode.LeftNode = new Node<int>(6);
+//	binaryTree.Root.RightNode.RightNode = new Node<int>(7);
 	//	binaryTree.Root.LeftNode.LeftNode.LeftNode = new Node<int>(6);
 //	binaryTree.Root.LeftNode.RightNode.RightNode = new Node<int>(7);
 	
@@ -23,6 +23,8 @@ void Main()
 	binaryTree.Postorder(binaryTree.Root);
 	"***BFS******".Dump();
 	binaryTree.BFS();
+	"***Morris InOrder******".Dump();
+	binaryTree.MorrisTraversal(binaryTree.Root);
 }
 
 //Node with no children are leafs
@@ -153,5 +155,48 @@ public class BinaryTree<T>
 				queue.Enqueue(node.RightNode);
 			}
 		}
+	}
+
+	public void MorrisTraversal(Node<T> root)
+	{
+		Node<T> current, pre;
+
+		if (root == null)
+			return;
+
+		current = root;
+		while (current != null)
+		{
+			if (current.LeftNode == null)
+			{
+				current.Data.Dump();
+				current = current.RightNode;
+			}
+			else
+			{
+				/* Find the inorder predecessor of current */
+				pre = current.LeftNode;
+				while (pre.RightNode != null && pre.RightNode != current)
+					pre = pre.RightNode;
+
+				/* Make current as right child of its inorder predecessor */
+				if (pre.RightNode == null)
+				{
+					pre.RightNode = current;
+					current = current.LeftNode;
+				}
+
+				/* Revert the changes made in if part to restore the  
+                    original tree i.e., fix the right child of predecssor*/
+				else
+				{
+					pre.RightNode = null;
+					current.Data.Dump();
+					current = current.RightNode;
+				} /* End of if condition pre->right == NULL */
+
+			} /* End of if condition current->left == NULL*/
+
+		} /* End of while */
 	}
 }
