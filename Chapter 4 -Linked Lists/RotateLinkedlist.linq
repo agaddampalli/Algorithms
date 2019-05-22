@@ -131,5 +131,3 @@ public static void Main()
 	linkedList.rotate(2);
 	linkedList.Get();
 }
-
-
