@@ -2,14 +2,19 @@
 
 void Main()
 {
+<<<<<<< HEAD
 	ClimbStairs(4).Dump();
 	climbStairs(0,5,new int[5+1]).Dump();
 	climbStairs(6).Dump();
 	climbStairsFib(6).Dump();
+=======
+	
+>>>>>>> c04760614cabfaf3466df7530a05dde1efa19e1d
 }
 
 public int ClimbStairs(int n)
 {
+<<<<<<< HEAD
 	return climbStairs(0,n);
 }
 
@@ -88,3 +93,9 @@ private int climbStairs(int i, int n, int[] memo)
 	
 	return memo[i];
 }
+=======
+	
+	return n;
+
+}
+>>>>>>> c04760614cabfaf3466df7530a05dde1efa19e1d

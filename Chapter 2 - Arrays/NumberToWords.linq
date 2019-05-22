@@ -51,6 +51,7 @@ public string NumberToWords(int num)
 	
 	while (num != 0)
 	{
+<<<<<<< HEAD
 		var outputNum = 0;
 		
 		if(num > 999999999)
@@ -60,9 +61,25 @@ public string NumberToWords(int num)
 			output.Append(wordDictionary[1000000000]);
 			
 			num = num % 1000000000;
+=======
+		if(wordDictionary.ContainsKey(num))
+		{
+			output = GetOutputString(wordDictionary, num, multiplier, output);
+		}
+		if(num < 99)
+		{
+			var outputNum = num % 10;
+			output = GetOutputString(wordDictionary, outputNum, multiplier, output);
+		}
+		if (!wordDictionary.ContainsKey(num))
+		{
+			var outputNum = num % 10;
+			output = GetOutputString(wordDictionary, outputNum, multiplier, output);
+>>>>>>> c04760614cabfaf3466df7530a05dde1efa19e1d
 		}
 		else if(num <= 999999999 && num > 99999999)
 		{
+<<<<<<< HEAD
 			outputNum = num / 100000000;
 			output.Append(BuildOutputString(wordDictionary, outputNum));
 			output.Append(wordDictionary[100]);
@@ -103,6 +120,9 @@ public string NumberToWords(int num)
 			output.Append(wordDictionary[1000]);
 
 			num = num % 1000;
+=======
+			output = GetOutputString(wordDictionary, num, multiplier, output);
+>>>>>>> c04760614cabfaf3466df7530a05dde1efa19e1d
 		}
 		else if (num <= 999 && num > 99)
 		{
@@ -119,6 +139,7 @@ public string NumberToWords(int num)
 		}
 	}
 
+<<<<<<< HEAD
 	return output.ToString().Trim();
 }
 
@@ -146,5 +167,19 @@ private string BuildOutputString(Dictionary<int, string> wordDictionary, int num
 		}
 		
 		return output;
+=======
+	return output.ToString();
+}
+
+private string GetOutputString(Dictionary<int, string> wordDictionary, int num, int multiplier, string output)
+{
+	if (wordDictionary.ContainsKey(num * multiplier))
+	{
+		return wordDictionary[num * multiplier] + " " + output;
+	}
+	else
+	{
+		return wordDictionary[num] + " " + wordDictionary[multiplier] + " " + output;
+>>>>>>> c04760614cabfaf3466df7530a05dde1efa19e1d
 	}
 }
