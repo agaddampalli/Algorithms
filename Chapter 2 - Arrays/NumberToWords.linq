@@ -47,29 +47,23 @@ public string NumberToWords(int num)
 	var multiplier = 1;
 	while (num != 0)
 	{
+		if(wordDictionary.ContainsKey(num))
+		{
+			output = GetOutputString(wordDictionary, num, multiplier, output);
+		}
+		if(num < 99)
+		{
+			var outputNum = num % 10;
+			output = GetOutputString(wordDictionary, outputNum, multiplier, output);
+		}
 		if (!wordDictionary.ContainsKey(num))
 		{
 			var outputNum = num % 10;
-			if (wordDictionary.ContainsKey(outputNum * multiplier))
-			{
-				output = wordDictionary[outputNum * multiplier] + " " + output;
-			}
-			else
-			{
-				output = wordDictionary[outputNum] + " " + wordDictionary[multiplier] + " " + output;
-			}
+			output = GetOutputString(wordDictionary, outputNum, multiplier, output);
 		}
 		else
 		{
-			if (wordDictionary.ContainsKey(num * multiplier))
-			{
-				output = wordDictionary[num * multiplier] + " " + output;
-			}
-			else
-			{
-				output = wordDictionary[num] + " " + wordDictionary[multiplier] + " " + output;
-				num = num / 10;
-			}
+			output = GetOutputString(wordDictionary, num, multiplier, output);
 		}
 
 		num = num / 10;
@@ -77,4 +71,16 @@ public string NumberToWords(int num)
 	}
 
 	return output.ToString();
+}
+
+private string GetOutputString(Dictionary<int, string> wordDictionary, int num, int multiplier, string output)
+{
+	if (wordDictionary.ContainsKey(num * multiplier))
+	{
+		return wordDictionary[num * multiplier] + " " + output;
+	}
+	else
+	{
+		return wordDictionary[num] + " " + wordDictionary[multiplier] + " " + output;
+	}
 }
