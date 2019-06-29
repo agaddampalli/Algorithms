@@ -3,6 +3,11 @@
 void Main()
 {
 	StringCompression("qwertyuuuiop").Dump();
+	
+	var chars = new char[] {'a','a','a','b','b', 'a'};
+	
+	Compress(chars).Dump();
+	
 }
 
 public string StringCompression(string input)
@@ -42,4 +47,50 @@ public string StringCompression(string input)
 	}
 
 	return input;
+}
+
+public int Compress(char[] chars)
+{
+	int i = 0;
+	int j = 0;
+	
+	int count = 0;
+	int currentChar = chars[0];
+	while(i<chars.Length)
+	{
+		if(chars[i] == currentChar)
+		{
+			count++;
+		}
+		else
+		{
+			chars[j++] = (char)currentChar;
+			if(count > 1)
+			{
+				var countString = count.ToString();
+				for (int x = 0; x < countString.Length; x++)
+				{
+					chars[j++] = countString[x];
+				}
+			}
+			
+			currentChar = chars[i];
+			count = 1;
+		}
+	
+		i++;
+	}
+
+	chars[j++] = (char)currentChar;
+	if (count > 1 && j < chars.Length)
+	{
+		var countString = count.ToString();
+		for (int x = 0; x < countString.Length; x++)
+		{
+			chars[j++] = countString[x];
+		}
+	}
+	
+	chars.Dump();
+	return j;
 }
