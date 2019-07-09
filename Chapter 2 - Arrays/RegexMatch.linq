@@ -23,14 +23,9 @@ public bool IsMatch(string s, string p)
 		return firstMatch && IsMatch(s.Substring(1), p.Substring(1));
 	}
 }
-<Query Kind="Program" />
 
-void Main()
-{
-	IsMatch("aa", "a").Dump();
-}
 
-public bool IsMatch(string s, string p)
+public bool IsMatch1(string s, string p)
 {
 	if(string.IsNullOrWhiteSpace(s))
 	{

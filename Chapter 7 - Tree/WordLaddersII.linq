@@ -75,8 +75,37 @@ public List<IList<string>> FindLadders(string start, string end, List<string> wo
 
 	prevNodes.Dump();
 	// BackTracing the path 
-	dfs(start, end, new List<string> {}, prevNodes,  output);
+	DFS(start, end, new HashSet<string>(), new List<string> {start},output, prevNodes);
 	return output;
+}
+
+public void DFS(string src, string dest, HashSet<string> visited, List<string> currentList, List<IList<string>> result, Dictionary<string, List<string>> graph)
+{
+
+	if (src.Equals(dest))
+	{
+		var clonedList = Clone(currentList);
+		result.Add(clonedList);
+	}
+	else
+	{
+		visited.Add(src);
+		foreach (var element in graph[src])
+		{
+			if (!visited.Contains(element))
+			{
+				currentList.Add(element);
+				DFS(element, dest, visited, currentList, result, graph);
+			}
+		}
+	}
+
+	currentList.Remove(src);
+}
+
+public IList<string> Clone(IList<string> listToClone)
+{
+	return listToClone.Select(item => (string)item).ToList();
 }
 
 void dfs(String s, String e, List<string> cur, Dictionary<String, List<string>> next, List<IList<String>> res)

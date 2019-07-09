@@ -7,10 +7,13 @@ void Main()
 	//abcabcbb
 	//abbcde
 	//bbtablud
-	List<char> items = new List<char>();
+	HashSet<char> items = new HashSet<char>();
 	int maxLength = 0;
 	int startIndex = 0;
 	int endIndex = 0;
+
+	int maxStringStart = 0;
+	int maxStringEnd = 0;
 	while(startIndex < s.Length && endIndex < s.Length)
 	{
 		if(items.Contains(s[endIndex]))
@@ -22,13 +25,21 @@ void Main()
 		{
 			items.Add(s[endIndex]);
 			endIndex++;
-			maxLength = Math.Max(maxLength, endIndex-startIndex);
+			
+			if(maxLength < endIndex-startIndex)
+			{
+				maxLength = endIndex-startIndex;
+				maxStringStart = startIndex;
+				maxStringEnd = endIndex;
+			}
 		}
 	}
 
 	items.Dump();
 	items.Count.Dump();
 	$"MaxLength: {maxLength}".Dump();
+	
+	s.Substring(maxStringStart, maxLength).Dump();
 }
 
 public class LongestSubStringIndexes

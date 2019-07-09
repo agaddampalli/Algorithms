@@ -2,7 +2,46 @@
 
 void Main()
 {
-	PalindromePermutation("Tact Coa").Dump();
+	PalindromePermutation("AaBb//a").Dump();
+
+	PalindromePermutation1("aaa").Dump();
+	
+	IsPalindrome("0P").Dump();
+}
+
+public bool PalindromePermutation1(string input)
+{
+	var inputChars = new int[256];
+	
+	for (int i = 0; i < input.Length; i++)
+	{
+		inputChars[input[i]]++;
+	}
+	
+	bool length1Char = false;
+	for (int i = 0; i < inputChars.Length; i++)
+	{
+		if(inputChars[i] % 2 == 1)
+		{
+			if(length1Char)
+			{
+				return false;
+			}
+			
+			length1Char = true;
+			continue;
+		}
+		else if(inputChars[i] == 2 || inputChars[i] == 0)
+		{
+			continue;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 public bool PalindromePermutation(string input)
@@ -39,12 +78,12 @@ public bool PalindromePermutation(string input)
 
 public bool IsPalindrome(string input)
 {
-	if(string.IsNullOrWhiteSpace(input))
+	input = RemoveSpecialCharacters(input);
+	if (string.IsNullOrWhiteSpace(input))
 	{
 		return true;
 	}
 	
-	input = RemoveSpecialCharacters(input);
 	var length = input.Length -1;
 	for (int i = 0; i < (length/2)+1; i++)
 	{
@@ -62,9 +101,14 @@ public static string RemoveSpecialCharacters(string str)
 	StringBuilder sb = new StringBuilder();
 	foreach (char c in str)
 	{
-		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
+		if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') )
 		{
-			sb.Append(c);
+			var lowercaseChar = c;
+			if(c < 97 && c > 57)
+			{
+				lowercaseChar = (char)((int)lowercaseChar + 32);
+			}
+			sb.Append(lowercaseChar);
 		}
 	}
 	return sb.ToString();

@@ -7,16 +7,54 @@ void Main()
 							   		new int[]{0, 3},
 							   		new int[]{1, 4},
 							   		new int[]{2, 3},
-//							   		new int[]{5, 4},
-//							   		new int[]{4, 5},
-//							   		new int[]{5, 6},
-//							   		new int[]{6, 3},
-//							   		new int[]{6, 1},
+							   		new int[]{5, 4},
+							   		new int[]{4, 3},
+							   		new int[]{5, 6},
+							   		new int[]{6, 3},
+							   		new int[]{6, 1},
 									};
 
-	ValidTree(5, input).Dump();
+	ValidTree(7, input).Dump();
 }
 
+public bool ValidTreeDict(int n, int[][] edges)
+{
+	if (n <= 1) return true;
+	
+	var graph = new Dictionary<int, List<int>>();
+	for (int i = 0; i < n; i++)
+	{
+		graph.Add(i, new List<int>());
+	}
+	
+	for (int i = 0; i < edges.Length; i++)
+	{
+		graph[edges[i][0]].Add(edges[i][1]);
+	}
+	
+	return DFS(graph, 0, new HashSet<int>());
+}
+
+public bool DFS(Dictionary<int, List<int>> graph, int src, HashSet<int> visited)
+{
+	visited.Add(src);
+	
+	var adjacenyList = graph[src];
+	
+	foreach (var element in adjacenyList)
+	{
+		if(visited.Contains(element))
+		{
+			return false;
+		}
+		else
+		{
+			return DFS(graph, element, visited);
+		}
+	}
+	
+	return true;
+}
 public bool ValidTree(int n, int[][] edges)
 {
 	if (n <= 1) return true;
