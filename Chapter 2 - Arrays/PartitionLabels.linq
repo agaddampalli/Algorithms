@@ -11,7 +11,6 @@ public List<int> partitionLabels(String S)
 	for (int i = 0; i < S.Length; ++i)
 		last[S[i] - 'a'] = i;
 
-	last.Dump();
 	int j = 0, anchor = 0;
 	List<int> ans = new List<int>();
 	for (int i = 0; i < S.Length; ++i)
