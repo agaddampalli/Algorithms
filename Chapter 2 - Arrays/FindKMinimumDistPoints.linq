@@ -39,6 +39,33 @@ public int[][] FindKMimimumDistPoints(int[][] input,int[] source, int k)
 	return output.ToArray();
 }
 
+public int[][] FindKMimimumDistPointsFromOrigin(int[][] input, int K)
+{
+	var output = new List<int[]>();
+	var source = new int[] { 0, 0};
+	
+	if (input == null)
+	{
+		return output.ToArray();
+	}
+
+	var temp = new int[input.Length][];
+
+	for (int i = 0; i < input.Length; i++)
+	{
+		temp[i] = new int[] { i, Distance(source, input[i]) };
+	}
+
+	Array.Sort(temp, (x, y) => x[1] - y[1]);
+
+	for (int i = 0; i < K; i++)
+	{
+		output.Add(input[temp[i][0]]);
+	}
+
+	return output.ToArray();
+}
+
 public int Distance(int[] pointA, int[] pointB)
 {
 	return (pointA[0] - pointB[0])*(pointA[0] - pointB[0]) + (pointA[1] - pointB[1]) * (pointA[1] - pointB[1]);

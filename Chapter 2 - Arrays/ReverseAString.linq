@@ -3,7 +3,8 @@
 void Main()
 {
 	var input = new char[] { 'h','a','n','n','a','H'};
-	
+
+	ReverseStringRecursive(input);
 	ReverseString(input);
 }
 
@@ -23,4 +24,24 @@ public void ReverseString(char[] s)
 	}
 	
 	s.Dump();
+}
+
+public void ReverseStringRecursive(char[] s)
+{
+	Reverse(s, 0, s.Length-1);
+	
+	s.Dump();
+}
+
+public void Reverse(char[] s, int start, int end)
+{
+	if(start < end)
+	{
+		var temp = s[start];
+		s[start] = s[end];
+		s[end] = temp;
+		start++;
+		end--;
+		Reverse(s, start, end);
+	}
 }

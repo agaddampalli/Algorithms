@@ -2,7 +2,7 @@
 
 void Main()
 {
-	var input = "1234";
+	var input = "123";
 	
 	var length = factorial(input.Length);
 	
