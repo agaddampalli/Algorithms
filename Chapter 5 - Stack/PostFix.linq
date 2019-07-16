@@ -2,7 +2,8 @@
 
 void Main()
 {
-	var exp = "2+3*(1^5-6)^(1+2*1)-2";
+//	var exp = "2+3*(1^5-6)^(1+2*1)-2";
+	var exp = "1+1+(2*4/2)";
 	var postfixExpression = InfixToPostFix(exp);
 	postfixExpression.Dump();
 	EvaluatePostFix(postfixExpression).Dump();
