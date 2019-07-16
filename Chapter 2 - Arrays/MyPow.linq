@@ -2,24 +2,31 @@
 
 void Main()
 {
-	MyPow(2,11).Dump();
+	MyPow(2, 10).Dump();
 }
 
- private double fastPow(double x, long n) {
-        if (n == 0) {
-            return 1.0;
-        }
-        double half = fastPow(x, n / 2);
-        if (n % 2 == 0) {
-            return half * half;
-        } else {
-            return half * half * x;
-        }
-    }
-	
-    public double MyPow(double x, int n) {
-        long N = n;
-        if (N < 0) {
+private double fastPow(double x, long n)
+{
+	if (n == 0)
+	{
+		return 1.0;
+	}
+	double half = fastPow(x, n / 2);
+	if (n % 2 == 0)
+	{
+		return half * half;
+	}
+	else
+	{
+		return half * half * x;
+	}
+}
+
+public double MyPow(double x, int n)
+{
+	long N = n;
+	if (N < 0)
+	{
 		x = 1 / x;
 		N = -N;
 	}
@@ -68,12 +75,12 @@ public double MyPowRecursion(double x, int n)
 
 private double MyPow(double x, int n, double value)
 {
-	if(n == 0)
+	if (n == 0)
 	{
 		return value;
 	}
-	
+
 	value = value * x;
-	
-	return MyPow(x,--n,value);
+
+	return MyPow(x, --n, value);
 }

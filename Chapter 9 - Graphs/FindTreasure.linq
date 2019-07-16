@@ -2,7 +2,6 @@
 
 void Main()
 {
-<<<<<<< HEAD
 	var input =  new int[4,4];
 
 	input[2, 3] = 9;

@@ -1,0 +1,106 @@
+System Design:
+
+1. Features 
+2. Availability - does need to be always up
+3. Latency Performace -- UI or background job
+4. Scalability - number of users
+5. Durability -- Data should maintain integrity, 
+6. Class Diagram -- Objects and Classes
+7. Security and Privacy -- design an authentication system
+8. Cost effective
+
+Concepts to know
+
+Vertical vs horizontal scaling -- vertical(add more cpu and memory) horizontal(add more hosts)
+
+CAP theorem -- Consistency Availability Partition Tolerance
+
+ACID vs BASE -- ACID (Atomic Consistent Isolation Durability)(Relational Databased) BASE (Basic Availability Soft State Eventual Consistency)(NoSql)
+
+Partitioning/Sharding -- Split the data (consistent hashing)
+
+Consistent Hashing -- Must Read
+
+Optimistic vs pessimistic locking -- Optimistic (get the lock before committing the data) pessimistic (acqiure locks before hand)
+
+Strong vs eventual consistency
+
+RelationalDB vs NoSQL
+
+Types of NoSQL
+     Key value
+     Wide column
+     Document-based
+     Graph-based
+
+Caching
+
+Data center/racks/hosts
+
+CPU/memory/Hard drives/Network bandwidth
+
+Random vs sequential read/writes to disk
+
+HTTP vs http2(multiple requests on single call) vs WebSocket 
+
+TCP/IP model
+
+ipv4 - 32bit vs ipv6 - 128bit (IP routing works)
+
+TCP (reliable) vs UDP (unrelaible) 
+
+DNS lookup -- how dns is converted to ip address
+
+Https & TLS -- secuirty
+
+Public key infrastructure and certificate authority(CA)
+
+Symmetric (AES) vs asymmetric encryption
+
+Load Balancer -- l4 or l7
+
+CDNs & Edges 
+
+Bloom filters and Count-Min sketch
+
+Paxos -- consensus over distributed hosts
+		 Leader election
+
+Design patterns and Object-oriented design
+
+Virtual machines and containers
+
+Pub-sub architecture 
+
+MapReduce
+
+Multithreading, locks, synchronization, CAS(compare and set)
+
+
+
+Tools
+Cassandra -- consistency hashing and gossiping
+MongoDB/Couchbase -- json document storage
+Mysql
+
+Memcached
+Redis
+
+Zookeeper -- Configuration management system
+Kafka -- fault tolerant queue
+
+NGINX -- load balancer
+HAProxy -- load balancer
+
+Solr, Elastic search
+
+Amazon S3
+
+Docker, Kubernetes, Mesos
+
+Hadoop/Spark and HDFS
+
+
+
+
+
