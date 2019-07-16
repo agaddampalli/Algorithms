@@ -5,7 +5,7 @@ void Main()
 	var trie = new Trie();
 
 	trie.Insert("apple");
-	trie.Insert("app");
+//	trie.Insert("app");
 	trie.Search("apple").Dump();   // returns true
 	trie.Search("app").Dump();     // returns false
 	trie.StartsWith("app").Dump(); // returns true

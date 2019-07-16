@@ -2,23 +2,68 @@
 
 void Main()
 {
-	var words = new string[] { "wrt", "wrf", "er", "ett", "rftt" };
+	var words = new string[] {  "wrt",  "wrf",  "er",  "ett",  "rftt"};
 
 	AlienOrder(words).Dump();
 }
 
 public string AlienOrder(string[] words)
 {
-
 	var graph = new Dictionary<char, HashSet<char>>();
 	var levels = new Dictionary<char, int>();
+
+	var output = string.Empty;
 
 	BuildGraph(words, levels, graph);
 
 	levels.Dump();
 	graph.Dump();
+	
+	return TopologicalSort(graph, levels);
+}
 
-	return string.Empty;
+public string TopologicalSort(Dictionary<char, HashSet<char>> graph, Dictionary<char, int> vertices)
+{
+	var output = new StringBuilder();
+	var queue = new Queue<char>();
+	
+	foreach (var element in vertices)
+	{
+		if(element.Value == 0)
+		{
+			queue.Enqueue(element.Key);
+		}
+	}
+	
+	if(queue.Count == 0)
+	{
+		return string.Empty;
+	}
+	
+	while(queue.Count !=0)
+	{
+		var ch = queue.Dequeue();
+		output.Append(ch);
+		vertices.Remove(ch);
+		if(graph.ContainsKey(ch))
+		{
+			var neighbors = graph[ch];
+			foreach (var element in neighbors)
+			{
+				if(vertices.ContainsKey(element))
+				{
+					vertices[element]--;
+					
+					if(vertices[element] == 0)
+					{
+						queue.Enqueue(element);
+					}
+				}
+			}
+		}
+	}
+	
+	return vertices.Count == 0 ? output.ToString() : string.Empty;
 }
 
 public void BuildGraph(string[] words, Dictionary<char, int> levels, Dictionary<char, HashSet<char>> graph)
@@ -44,7 +89,7 @@ public void BuildGraph(string[] words, Dictionary<char, int> levels, Dictionary<
 				{
 					graph.Add(current.val, new HashSet<char>());
 				}
-				
+
 				if (!graph[current.val].Contains(ch))
 				{
 					graph[current.val].Add(ch);
@@ -53,7 +98,7 @@ public void BuildGraph(string[] words, Dictionary<char, int> levels, Dictionary<
 					{
 						levels.Add(ch, 0);
 					}
-
+					
 					levels[ch]++;
 				}
 
