@@ -9,7 +9,7 @@ void Main()
 	EvaluatePostFix(postfixExpression).Dump();
 }
 
-// Define other methods and classes here
+
 private static string InfixToPostFix(string exp)
 {
 	var operatorDictionary = new Dictionary<char, int> { { '*', 2 }, { '/', 2 }, { '%', 2 }, { '+', 1 }, { '-', 1 } , { '^', 3 } };

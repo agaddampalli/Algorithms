@@ -2,7 +2,7 @@
 
 void Main()
 {
-	IsPalindrome("aa").Dump();
+	IsPalindrome("ababababababaababababababa").Dump();
 }
 
 public bool IsPalindrome(string s)

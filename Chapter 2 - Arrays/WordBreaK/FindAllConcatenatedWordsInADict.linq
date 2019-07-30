@@ -20,13 +20,11 @@ public IList<string> FindAllConcatenatedWordsInADict(string[] words)
 
 	for (int i = 0; i < words.Length; i++)
 	{
-		if(root.Match(root, words[i]))
+		if(root.Match(root, words[i], 0, 0))
 		{
 			output.Add(words[i]);
 		}
 	}
-	
-	root.Find(root, "cat").Dump();
 	
 	return output;
 }
@@ -60,47 +58,48 @@ public class Trie
 		node.end = true;
 	}
 
-	public bool Find(Trie root, string word)
+	public bool Match(Trie root, string word, int start, int wordCount)
 	{
-		var node = root;
-		for (int i = 0; i < word.Length; i++)
+		if(start >= word.Length)
 		{
-			if (node.children[word[i] - 'a'] == null)
-			{
-				return false;
-			}
-
-			node = node.children[word[i] - 'a'];
-		}
-
-		return node.end;
-	}
-
-	public bool Match(Trie root, string word)
-	{
-		var node = root;
-		int start = 0;
-		for (int i = start; i < word.Length; i++)
-		{
-			var child = node.children[word[i]- 'a'];
-			if(child != null)
-			{
-				if(child.end)
-				{
-					start = i;
-					node = root;
-				}
-				else
-				{
-					node = child;
-				}
-			}
-			else
-			{
-				return false;
-			}
+			return wordCount >= 2;
 		}
 		
-		return node.end;
+		var node = root;
+		
+		var ends = FindEnds(root, word, start);
+		
+		for (int i = ends.Count-1; i >= 0; i--)
+		{
+			if(Match(root, word, ends[i] + 1, wordCount + 1))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	public IList<int> FindEnds(Trie root, string word, int start)
+	{
+		var ends = new List<int>();
+		var node = root;
+		for (int i = start; i < word.Length; i++)
+		{
+			var child = node.children[word[i] - 'a'];
+			if (child == null)
+			{
+				return ends;
+			}
+
+			node = child;
+
+			if (node.end)
+			{
+				ends.Add(i);
+			}
+		}
+
+		return ends;
 	}
 }

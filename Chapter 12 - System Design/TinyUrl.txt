@@ -1,0 +1,33 @@
+API:
+
+POST: CreateTinyUrl([FromBody]string longUrl)
+GET: GetTinyUrl(string tinyUrl) 
+
+
+BO:
+
+a-z, A-Z, 0-9 => 62 characters
+if we generate a tinyurl of length 7 then we can generate pow(62,7) combinations
+
+
+
+DAO:
+
+Sql table or NoSql database
+
+1. Generate the url, get the url from database, if exists generate new one, else udpate database. --> might get conflict when two nodes are trying to update same random string
+2. Put the url if absent --> database need to be smart enough to recognize this and update or not
+3. put the url to database, get the url, if we get the same long url then we are done, else run infinite times to generate random tinyurl
+
+MD5 --> hashing function
+
+Take the first 43 bits -- convert it to  7 character url
+Advantage --> if we get the same long url, we will not cretae a duplicate entry in the db
+
+
+Counter host
+
+A microservice which maintains the random string -- but when this goes down, it becomes the single point of failure
+Each maintaing its own counter -- could result in collisions if the number of requests increase
+Range based -- Zoo keeper maintaining the range of codes. each worker will be assigned a range 
+
