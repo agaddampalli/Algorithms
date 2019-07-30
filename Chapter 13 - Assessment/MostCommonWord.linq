@@ -3,9 +3,10 @@
 void Main()
 {
 	var paragraph = "Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball he hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit.Bob hit a ball the hit BALL flew far after it was hit. ";
-	var banned= new string[]{"hit"};
-	
+	var banned = new string[] { "hit" };
+
 	MostCommonWord(paragraph, banned).Dump();
+	GetWordsFromParagraph(paragraph).Dump();
 }
 
 public string MostCommonWord(string paragraph, string[] banned)
@@ -15,44 +16,68 @@ public string MostCommonWord(string paragraph, string[] banned)
 		return string.Empty;
 	}
 
-	var punctuationSet = new HashSet<char> { '!', '?', '\'', ';', '.', ',' };
-	var bannedwordDict = new HashSet<string>();
-	for (int i = 0; i < banned.Length; i++)
-	{
-		bannedwordDict.Add(banned[i]);
-	}
-
+	var bannedwordDict = new HashSet<string>(banned);
 	var commonwordDict = new Dictionary<string, int>();
-	var commonwordArray = paragraph.Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+
+	var commonwords = GetWordsFromParagraph(paragraph);
 	int maxLength = 0;
 	string maxOccuredWord = string.Empty;
-	for (int i = 0; i < commonwordArray.Length; i++)
+
+	foreach (var word in commonwords)
 	{
-		var word = commonwordArray[i].ToLower();
-		if(punctuationSet.Contains(word[word.Length-1]))
+		var lowerCaseWord = word.ToLower();
+		if (bannedwordDict.Contains(lowerCaseWord))
 		{
-			word = word.Substring(0, word.Length-1);
+			continue;
 		}
-		
-		if(!bannedwordDict.Contains(word))
+
+		if (commonwordDict.ContainsKey(lowerCaseWord))
 		{
-			if(commonwordDict.ContainsKey(word))
-			{
-				commonwordDict[word]++;
-			}
-			else
-			{
-				commonwordDict.Add(word, 1);
-			}
-			
-				
-			if(commonwordDict[word] > maxLength)
-			{
-				maxLength = commonwordDict[word];
-				maxOccuredWord = word;
-			}
+			commonwordDict[lowerCaseWord]++;
+		}
+		else
+		{
+			commonwordDict.Add(lowerCaseWord, 1);
+		}
+
+		if (commonwordDict[lowerCaseWord] > maxLength)
+		{
+			maxLength = commonwordDict[lowerCaseWord];
+			maxOccuredWord = lowerCaseWord;
 		}
 	}
-	
+
 	return maxOccuredWord;
+}
+
+private static IEnumerable<string> GetWordsFromParagraph(string paragraph)
+{
+	var words = new List<string>();
+
+	int startIndex = 0;
+	for (int i = 0; i < paragraph.Length; i++)
+	{
+		if (IsChar(paragraph[i]))
+		{
+			continue;
+		}
+		else
+		{
+			var temp = paragraph.Substring(startIndex, i - startIndex);
+
+			if (!string.IsNullOrWhiteSpace(temp))
+			{
+				words.Add(temp);
+			}
+			startIndex = i + 1;
+		}
+	}
+
+	return words;
+
+}
+
+private static bool IsChar(char ch)
+{
+	return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }

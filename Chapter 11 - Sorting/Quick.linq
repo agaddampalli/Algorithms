@@ -25,7 +25,7 @@ public void Sort(int[] nums, int low, int high)
 {
 	if(low < high)
 	{
-		var pivot = PartitionMiddle(nums, low, high);
+		var pivot = PartitionFirst(nums, low, high);
 		
 		Sort(nums, low, pivot-1);
 		Sort(nums, pivot+1, high);

@@ -1,0 +1,10 @@
+Web hosting:
+
+1. Shared hosting -- where the system resources are shared by multiple applications
+2. VPS'es -- virtual private shared hosts, where each application has its own virtual machine and the resources to these are managed by the vendor like VM ware
+3. Vertical scaling -- increasing the RAM or processors on a machine, but we can scale only to a real world limit
+4. Horizontal scaling -- Multiple servers to host the application
+5. Load balancer -- When we have multiple servers, to manage the requests (IPV4 - 32bit, IPV6 - 128 bit), nginix
+6. RAID: Redundant array of independent disks, maintain redundant data to improve partition tolerance
+7. Session state : Mysql cache, cookies or memcached
+8. nginx
