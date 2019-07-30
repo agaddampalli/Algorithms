@@ -2,46 +2,18 @@
 
 void Main()
 {
-	var requests = new List<Request>
-	{
-		new Request
-		{
-			EmployeeName = "Alex",
-			From = 1,
-			To = 2
-		},
-		new Request
-		{
-			EmployeeName = "Ben",
-			From = 2,
-			To = 1
-		},
-		new Request
-		{
-			EmployeeName = "Chris",
-			From = 1,
-			To = 2
-		},
-		new Request
-		{
-			EmployeeName = "David",
-			From = 2,
-			To = 3
-		},
-		new Request
-		{
-			EmployeeName = "Ellen",
-			From = 3,
-			To = 1
-		},
-		new Request
-		{
-			EmployeeName = "Frank",
-			From = 4,
-			To = 5
-		}
-	};
+	var requests = new List<Request>();
 
+	requests.Add(new Request("Alex", 1, 2));
+	requests.Add(new Request("Ben", 2, 1));
+	requests.Add(new Request("Chris", 1, 2));
+	requests.Add(new Request("David", 2, 3));
+	requests.Add(new Request("Ellen", 3, 1));
+	requests.Add(new Request("Frank", 4, 5));
+
+	requests.Sort((x, y) => x.From - y.From);
+
+	requests.Dump();
 	MoveRequests(requests).Dump();
 }
 
@@ -70,6 +42,13 @@ public class Request
 	public int From { get; set; }
 	public int To { get; set; }
 	public bool IsVisited { get; set; }
+
+	public Request(string emloyeeName, int from, int to)
+	{
+		EmployeeName = emloyeeName;
+		From = from;
+		To = to;
+	}
 }
 
 public class Graph
@@ -108,7 +87,7 @@ public class Graph
 			var values = AdjacencyList[src];
 			foreach (var element in values)
 			{
-				if(!visited.Contains(element.To))
+				if (!visited.Contains(element.To))
 				{
 					element.IsVisited = true;
 					visited.Add(src);
