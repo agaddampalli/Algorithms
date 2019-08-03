@@ -7,6 +7,9 @@ void Main()
 	GetMoviesOnFlight(durations, 250).Dump();
 }
 
+
+// Time Complexity: O(NLogN)
+// Space complexity: O(N)
 public int[] GetMoviesOnFlight(int[] moviesDuration, int totalDuration)
 {
 	Array.Sort(moviesDuration);

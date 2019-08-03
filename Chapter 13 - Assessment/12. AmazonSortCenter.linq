@@ -7,6 +7,8 @@ void Main()
 	AmazonSortCenter(packagesSpace, 90).Dump();
 }
 
+// Time Complexity: O(N)
+// Space complexity: O(N)
 public int[] AmazonSortCenter(int[] packagesSpace, int truckSpace)
 {
 	var targetTruckSpace = truckSpace - 30;

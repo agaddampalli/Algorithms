@@ -8,6 +8,8 @@ void Main()
 	FindOptimumRoute(10000, forwardRouteList, returnRouteList).Dump();
 }
 
+// Time Complexity: O(mn) m- forward route list length, n - return route list
+// Space complexity: O(2)
 public List<IList<int>> FindOptimumRoute(int maxTravelDist, int[,] forwardRouteList, int[,] returnRouteList)
 {
 	var result = new List<IList<int>>();

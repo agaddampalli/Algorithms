@@ -2,7 +2,7 @@
 
 void Main()
 {
-	MyPow(2, 10).Dump();
+	fastPow(2, 5).Dump();
 }
 
 private double fastPow(double x, long n)

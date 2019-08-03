@@ -7,6 +7,14 @@ void Main()
 	KClosest(input, 1).Dump();
 }
 
+// If we ignore the order, we can perform partial sort of elements using quick sort
+// we pick a pivot and sort all the elements smaller than this to left and greater than to right
+// if the current pivot is less than k we sort the elements from pivot+1 to end
+// if the current pivot is greater than k then we sort the elements from start to pivot-1
+// once we find K as pivot, then all the elements before that are already partially sorted
+// Time Complexity: O(N) on average
+// Space  Complexity: O(N) for recursive call stack
+
 public int[][] KClosest(int[][] input, int K)
 {
 	Sort(input, 0, input.Length-1, K);
@@ -106,4 +114,3 @@ public int Distance(int[] pointA, int[] pointB)
 {
 	return (pointA[0] - pointB[0]) * (pointA[0] - pointB[0]) + (pointA[1] - pointB[1]) * (pointA[1] - pointB[1]);
 }
-

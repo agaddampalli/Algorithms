@@ -7,6 +7,10 @@ void Main()
 	MinRollsForDice(nums).Dump();
 }
 
+
+// We find the maximum number of conversion for each side using the count of the number and its compliment
+// Time Complexity: O(N) N is the length of nums;
+// Space Complexit: O(1) 
 public int MinRollsForDice(int[] nums)
 {
 	var counts = new int[7];

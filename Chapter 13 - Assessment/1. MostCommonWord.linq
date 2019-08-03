@@ -6,9 +6,12 @@ void Main()
 	var banned = new string[] { "hit" };
 
 	MostCommonWord(paragraph, banned).Dump();
-	GetWordsFromParagraph(paragraph).Dump();
+//	GetWordsFromParagraph(paragraph).Dump();
+	GetWordsFromParagraph1(paragraph, new HashSet<string>(banned)).Dump();
 }
 
+// Time Complexity: O(P+B)
+// Space complexity: O(P+B)
 public string MostCommonWord(string paragraph, string[] banned)
 {
 	if (string.IsNullOrWhiteSpace(paragraph))
@@ -16,13 +19,15 @@ public string MostCommonWord(string paragraph, string[] banned)
 		return string.Empty;
 	}
 
-	var bannedwordDict = new HashSet<string>(banned);
+	// Building a hashset, to check if the string is present or not will happen in O(1)
+	var bannedwordDict = new HashSet<string>(banned); // O(b)
 	var commonwordDict = new Dictionary<string, int>();
 
-	var commonwords = GetWordsFromParagraph(paragraph);
+	var commonwords = GetWordsFromParagraph(paragraph); // O(p)
 	int maxLength = 0;
 	string maxOccuredWord = string.Empty;
 
+	//O(p)
 	foreach (var word in commonwords)
 	{
 		var lowerCaseWord = word.ToLower();
@@ -53,7 +58,6 @@ public string MostCommonWord(string paragraph, string[] banned)
 private static IEnumerable<string> GetWordsFromParagraph(string paragraph)
 {
 	var words = new List<string>();
-
 	int startIndex = 0;
 	for (int i = 0; i < paragraph.Length; i++)
 	{
@@ -75,6 +79,50 @@ private static IEnumerable<string> GetWordsFromParagraph(string paragraph)
 
 	return words;
 
+}
+
+private static IEnumerable<string> GetWordsFromParagraph1(string paragraph, HashSet<string> bannedWords)
+{
+	var words = new List<string>();
+	var commonwordDict = new Dictionary<string, int>();
+	int startIndex = 0;
+	int maxLength = 0;
+	string maxOccuredWord = string.Empty;
+	
+	for (int i = 0; i < paragraph.Length; i++)
+	{
+		if (IsChar(paragraph[i]))
+		{
+			continue;
+		}
+		else
+		{
+			var word = paragraph.Substring(startIndex, i - startIndex);
+			var lowerCaseWord = word.ToLower();
+			if (!string.IsNullOrWhiteSpace(word) && !bannedWords.Contains(lowerCaseWord) )
+			{
+				if (commonwordDict.ContainsKey(lowerCaseWord))
+				{
+					commonwordDict[lowerCaseWord]++;
+				}
+				else
+				{
+					commonwordDict.Add(lowerCaseWord, 1);
+				}
+
+				if (commonwordDict[lowerCaseWord] > maxLength)
+				{
+					maxLength = commonwordDict[lowerCaseWord];
+					maxOccuredWord = lowerCaseWord;
+				}
+			}
+			startIndex = i + 1;
+		}
+	}
+	
+	maxLength.Dump();
+	maxOccuredWord.Dump();
+	return words;
 }
 
 private static bool IsChar(char ch)

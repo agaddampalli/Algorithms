@@ -5,6 +5,8 @@ void Main()
 	GetSubStringWithKDistinctChars("awaglknagawunagwkwagl",4).Dump();
 }
 
+// Time Complexity: O(N * K)
+// Space complexity: O(N)
 public List<string> GetSubStringWithKDistinctChars(string s, int k)
 {
 	var hashset = new HashSet<string>();

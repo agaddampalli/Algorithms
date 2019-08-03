@@ -6,6 +6,8 @@ void Main()
 	minimumDistance(5,4,input).Dump();
 }
 
+// Time Complexity: O(numRows * numColumns)
+// Space complexity: O(numRows * numColumns)
 public int minimumDistance(int numRows, int numColumns, int[,] area)
 {
 	var visisted = new bool[numRows, numColumns];

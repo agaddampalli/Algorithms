@@ -24,7 +24,9 @@ public int LastStoneWeight(int[] stones)
 	return stones[stones.Length - 1];
 }
 
-
+// We can solve this using minheap, greedy algorithm
+// Time Complexity: O(NLogN)
+// Space complexit: O(N)
 public int MinRopesCost(int[] stones)
 {
 	var cost = 0;

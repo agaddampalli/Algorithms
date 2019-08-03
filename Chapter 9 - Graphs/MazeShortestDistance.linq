@@ -2,7 +2,22 @@
 
 void Main()
 {
+	var maze = new int[][] {
+		new int[] {0,0,0,0,1,0,0},
+		new int[] {0,0,1,0,0,0,0},
+		new int[] {0,0,0,0,0,0,0},
+		new int[] {0,0,0,0,0,0,1},
+		new int[] {0,1,0,0,0,0,0},
+		new int[] {0,0,0,1,0,0,0},
+		new int[] {0,0,0,0,0,0,0},
+		new int[] {0,0,1,0,0,0,1},
+		new int[] {0,0,0,0,1,0,0}
+	};
 
+	var start = new int[] { 0, 0 };
+	var end = new int[] { 8, 6 };
+	
+	ShortestDistance(maze, start, end).Dump();
 }
 
 public int ShortestDistance(int[][] maze, int[] start, int[] destination)
@@ -13,6 +28,7 @@ public int ShortestDistance(int[][] maze, int[] start, int[] destination)
 	visited[start[0], start[1]] = true;
 
 	int count = 0;
+	bool isFound = false;
 	while (queue.Count != 0)
 	{
 		var size = queue.Count;
@@ -21,75 +37,90 @@ public int ShortestDistance(int[][] maze, int[] start, int[] destination)
 		{
 			var node = queue.Dequeue();
 			
-			if (node.isRight && !IsWall(node.x + 1, node.y, maze, visited))
+			if(node.x == destination[0] && node.y == destination[1])
 			{
-				var temp = new Coordinates(node.x + 1, node.y);
-				visited[node.x + 1, node.y] = true;
+				isFound = true;
+			}
+			
+			if (node.isRight && !IsWall(node.x, node.y+1, maze, visited))
+			{
+				if(isFound) return -1;
+				
+				var temp = new Coordinates(node.x, node.y+1);
+				visited[node.x, node.y+1] = true;
 				temp.isRight = true;
 				queue.Enqueue(temp);
 				continue;
 			}
 
-			if (node.isLeft && !IsWall(node.x - 1, node.y, maze, visited))
+			if (node.isLeft && !IsWall(node.x, node.y-1, maze, visited))
 			{
-				var temp = new Coordinates(node.x - 1, node.y);
-				visited[node.x - 1, node.y] = true;
+				if (isFound) return -1;
+
+				var temp = new Coordinates(node.x, node.y-1);
+				visited[node.x, node.y-1] = true;
 				temp.isLeft = true;
 				queue.Enqueue(temp);
 				continue;
 			}
 
-			if (node.isUp && !IsWall(node.x, node.y - 1, maze, visited))
+			if (node.isUp && !IsWall(node.x-1, node.y, maze, visited))
 			{
-				var temp = new Coordinates(node.x, node.y - 1);
-				visited[node.x, node.y - 1] = true;
+				if (isFound) return -1;
+
+				var temp = new Coordinates(node.x-1, node.y);
+				visited[node.x-1, node.y] = true;
 				temp.isUp = true;
 				queue.Enqueue(temp);
 				continue;
 			}
 
-			if (node.isDown && !IsWall(node.x, node.y + 1, maze, visited))
+			if (node.isDown && !IsWall(node.x+1, node.y, maze, visited))
 			{
-				var temp = new Coordinates(node.x, node.y + 1);
-				visited[node.x, node.y + 1] = true;
+				if (isFound) return -1;
+
+				var temp = new Coordinates(node.x+1, node.y);
+				visited[node.x+1, node.y] = true;
 				temp.isDown = true;
 				queue.Enqueue(temp);
 				continue;
 			}
 
-			if (!IsWall(node.x + 1, node.y, maze, visited))
+			if (!IsWall(node.x, node.y+1, maze, visited))
 			{
-				var temp = new Coordinates(node.x + 1, node.y);
-				visited[node.x + 1, node.y] = true;
+				var temp = new Coordinates(node.x, node.y+1);
+				visited[node.x, node.y+1] = true;
 				temp.isRight = true;
 				queue.Enqueue(temp);
 			}
 
-			if (!IsWall(node.x - 1, node.y, maze, visited))
+			if (!IsWall(node.x, node.y-1, maze, visited))
 			{
-				var temp = new Coordinates(node.x - 1, node.y);
-				visited[node.x - 1, node.y] = true;
+				var temp = new Coordinates(node.x, node.y-1);
+				visited[node.x, node.y-1] = true;
 				temp.isLeft = true;
 				queue.Enqueue(temp);
 			}
 
 
-			if (!IsWall(node.x, node.y - 1, maze, visited))
+			if (!IsWall(node.x-1, node.y, maze, visited))
 			{
-				var temp = new Coordinates(node.x, node.y - 1);
-				visited[node.x, node.y - 1] = true;
+				var temp = new Coordinates(node.x-1, node.y);
+				visited[node.x-1, node.y] = true;
 				temp.isUp = true;
 				queue.Enqueue(temp);
 			}
 
-			if (!IsWall(node.x, node.y + 1, maze, visited))
+			if (!IsWall(node.x+1, node.y, maze, visited))
 			{
-				var temp = new Coordinates(node.x, node.y + 1);
-				visited[node.x, node.y + 1] = true;
+				var temp = new Coordinates(node.x+1, node.y);
+				visited[node.x+1, node.y] = true;
 				temp.isDown = true;
 				queue.Enqueue(temp);
 			}
 		}
+
+		if (isFound) return count;
 
 		count++;
 	}
@@ -100,8 +131,8 @@ public int ShortestDistance(int[][] maze, int[] start, int[] destination)
 
 private static bool IsWall(int row, int col, int[][] maze, bool[,] visisted)
 {
-	return row < maze.Length || row > 0 ||
-	col < maze[0].Length || col > 0 || visisted[row, col] ||
+	return row > maze.Length-1 || row < 0 ||
+	col > maze[0].Length-1 || col < 0 || visisted[row, col] ||
 	maze[row][col] == 1;
 }
 
