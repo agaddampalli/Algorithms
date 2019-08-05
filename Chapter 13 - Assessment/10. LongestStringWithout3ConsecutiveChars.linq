@@ -13,6 +13,9 @@ void Main()
 	ReorganizeString(maxHeap).Dump();
 }
 
+// Greedy problem
+// Time Complexity: O(NLogN)
+// Space complexity: O(N)
 public string ReorganizeString(MaxHeap maxHeap)
 {
 	var output = new StringBuilder();

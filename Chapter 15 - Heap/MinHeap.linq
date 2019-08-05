@@ -2,6 +2,21 @@
 
 void Main()
 {
+	var heap = new MinHeap(5);
+
+	heap.Enqueue(8);
+	heap.Enqueue(1);
+	heap.Enqueue(5);
+	heap.Enqueue(10);
+	heap.Enqueue(3);
+	
+	heap.Print();
+
+	heap.Dequeue();
+	heap.Dequeue();
+	heap.Dequeue();
+	
+	heap.Print();
 	
 }
 
@@ -54,6 +69,11 @@ public class MinHeap
 		}
 	}
 	
+	public void Print()
+	{
+		_items.Dump();	
+	}
+	
 	public int Peek()
 	{
 		if(currentSize == 0)
@@ -73,6 +93,7 @@ public class MinHeap
 		
 		var result = _items[0];
 		_items[0] = _items[currentSize - 1];
+		_items[currentSize - 1] = 0;
 		currentSize--;
 		HeapifyDown();
 		return result;
@@ -81,14 +102,35 @@ public class MinHeap
 	public void Enqueue(int item)
 	{
 		EnsureCapacity();
-		_items[GetRightChildIndex(currentSize)] = item;
+		_items[currentSize] = item;
 		currentSize++;
 		HeapifyUp();
 	}
 	
 	public void HeapifyDown()
 	{
+		var index = 0;
 		
+		while (HasLeftChild(index))
+		{
+			var smallerIndex = GetLeftChildIndex(index);
+			
+			if(HasRightChild(index) && GetRightChild(index) < GetLeftChild(index))
+			{
+				smallerIndex = GetRightChildIndex(index);
+			}
+			
+			if(_items[index] < _items[smallerIndex])
+			{
+				break;
+			}
+			else
+			{
+				Swap(index, smallerIndex);
+			}
+			
+			index = smallerIndex;
+		}
 	}
 
 	public void HeapifyUp()

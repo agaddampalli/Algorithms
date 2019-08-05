@@ -7,20 +7,41 @@ void Main()
 
 public bool RepeatedSubstringPattern(string s)
 {
-	var input = new int[26];
+	var lps = Generate(s);
 	
-	for (int i = 0; i < s.Length; i++)
-	{
-		input[s[i]-'a']++;
-	}
+	var maxLength = lps[s.Length-1];
 	
-	for (int i = 0; i < input.Length; i++)
+	return maxLength> 0 && (s.Length % (s.Length-maxLength))  == 0;
+}
+
+
+public int[] Generate(string pattern)
+{
+	var patternArray = new int[pattern.Length];
+
+	int i = 1, j = 0;
+	bool isMatched = false;
+	while (i < pattern.Length)
 	{
-		if(input[i] % 2 != 0)
+		if (pattern[i] == pattern[j])
 		{
-			return false;
+			isMatched = true;
+			patternArray[i] = j + 1;
+			j++;
 		}
+		else
+		{
+			j = j != 0 ? patternArray[j - 1] : j;
+
+			if (isMatched)
+			{
+				isMatched = !isMatched;
+				continue;
+			}
+		}
+
+		i++;
 	}
-	
-	return true;
+
+	return patternArray;
 }

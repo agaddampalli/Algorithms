@@ -11,7 +11,11 @@ void Main()
 	PrisonAfterNDays(cells, 1000000000).Dump();
 }
 
-
+// As there are 8 cells and each cell can have two state, we can have a maximum of 256 states 
+// With this, I am finding number of days it took to repeat the current sequence
+// One we find the cycle, N % CycleLength will give the day we want
+// Time Complexity: O(2 ^ N)
+// Space Complexity: O(2 ^ N + N) where N is number of cells
 public int[] PrisonAfterNDaysCorrect(int[] cells, int N)
 {
 	if (cells == null || !cells.Any() || N == 0)

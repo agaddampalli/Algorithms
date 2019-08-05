@@ -7,6 +7,12 @@ void Main()
 	PartitionLabels(input).Dump();
 }
 
+// We first find the maximum index of each character occurrence in S
+// Then we iterate through S to find the partition of string where the maximum occurrence of character
+// in this substring is equal to the current index of the character
+// We group the substring by the first occurrence of a character and the maximum occurrence of the character
+// Time Complexity: O(N) where N is the length of the string
+// Space complexity: O(N) where N is the length of the string
 public IList<int> PartitionLabels(string S)
 {
 	var temp = new int[26];
