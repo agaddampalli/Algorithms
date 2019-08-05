@@ -1,0 +1,38 @@
+Evenly distribute the load across the servers
+Consistent hashing to balance the load
+
+1. Get the request id -- RequestID
+2. Hash the request using hash function -- Hash(RequestID) > HashID
+3. Get the remainder -- HashID % Number of servers
+4. Map the remainder to the server
+
+
+4 servers 
+RequestID	HashFunctionValue	Server
+	1			10				 10/4 -- 2 
+	2			15				 15/4 -- 3
+	3			12				 12/4 -- 0
+
+If 5th server is added, the load need to be split accordingly
+
+5 servers 
+RequestID	HashFunctionValue	Server
+	1			10				 10/5 -- 0 
+	2			15				 15/5 -- 0
+	3			12				 12/5 -- 2
+	
+This routes the request to different servers and if servers cache certain state of the data, then this all will be wasted
+
+This is the reason to use consistent hashing:
+Consistent Hashing maps servers to the key space and assigns requests(mapped to relevant buckets, called load) to the next clockwise server. Servers can then store relevant request data in them while allowing the system flexibility and scalability.
+
+we hash the servers with multiple hash functions to provide multiple virtual server spaces to distribute the load
+
+HashFunctions:
+1. Modulo by prime number  -- this will reduce the collision hits, as prime number is divided by itself and 1
+2. Chaining: On collisions use linked list to store the elements at a specific hash key
+3. Linear probing (open addressing or closed hashing): Find the hashkey, if the spot is occupied find the next available slot (index+1)
+4. Quadratic Probing: instead of finding the next element, we multiply the index twice each time and check whether it can be fit into these slots (index + 1 * 1)
+5. Double hashing: use another hash function and find the next available slot (index + 1 * indexH)
+
+
