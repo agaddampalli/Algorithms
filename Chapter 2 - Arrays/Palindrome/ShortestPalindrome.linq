@@ -5,7 +5,8 @@ void Main()
 	var array = new int[] {0, 1, 3};
 
 	ShortestPalindromeBruteForce("abac").Dump();
-	ShortestPalindromePointers("aababababababa").Dump();
+	ShortestPalindromePointers("abcabc").Dump();
+	ShortestPalindromeKMP("abcabc").Dump();
 }
 
 public string ShortestPalindromeBruteForce(string s) 
@@ -46,6 +47,17 @@ public string ShortestPalindromePointers(string s)
 	return rev + ShortestPalindromePointers(s.Substring(0,i)) + s.Substring(i);
 }
 
+public string ShortestPalindromeKMP(string s)
+{
+	var rev = Reverse(s);
+	
+	var kmp = GenerateKMPTable(s + "#" + rev);
+	
+	var temp = Reverse(s.Substring(kmp[kmp.Length-1]));
+	
+	return temp + s;
+}
+
 public string Reverse(string s)
 {
 	var input = new StringBuilder(s);
@@ -63,4 +75,36 @@ public string Reverse(string s)
 	}
 	
 	return input.ToString();
+}
+
+public int[] GenerateKMPTable(string s)
+{
+	var kmp = new int[s.Length];
+	
+	int i = 1;
+	int j = 0;
+	
+	while(i < s.Length)
+	{
+		if (s[i] == s[j])
+		{
+			kmp[i] = j+1;
+			i++;
+			j++;
+		}
+		else
+		{
+			if( j == 0)
+			{
+				i++;
+				continue;
+			}
+			else
+			{
+				j = kmp[j-1];
+			}
+		}
+	}
+	
+	return kmp;
 }

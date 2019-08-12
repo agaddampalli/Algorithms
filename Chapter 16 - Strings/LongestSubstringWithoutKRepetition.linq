@@ -2,9 +2,9 @@
 
 void Main()
 {
-	var s = "aaabb";
+	var s = "baaabbabbb";
 	
-	FindSubStringWithoutRepetition(s, 3).Dump();
+	FindSubStringWithoutRepetition(s, 2).Dump();
 }
 
 public string FindSubStringWithoutRepetition(string s, int k)
