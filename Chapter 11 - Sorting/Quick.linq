@@ -2,7 +2,7 @@
 
 void Main()
 {
-	var input = new int[] { 64, 34, 25, 12, 80, 11, 90 };
+	var input = new int[] { 3,4,5,1,2 };
 
 	Quick(input);
 }
@@ -25,7 +25,7 @@ public void Sort(int[] nums, int low, int high)
 {
 	if(low < high)
 	{
-		var pivot = PartitionFirst(nums, low, high);
+		var pivot = PartitionLast(nums, low, high);
 		
 		Sort(nums, low, pivot-1);
 		Sort(nums, pivot+1, high);
@@ -35,17 +35,26 @@ public void Sort(int[] nums, int low, int high)
 public int PartitionLast(int[] nums, int low, int high)
 {
 	var pivot = nums[high];
-	int start = low;
+	int start = high;
 
-	for (int i = low ; i < high; i++)
+//	for (int i = low ; i < high; i++)
+//	{
+//		if(nums[i] < pivot)
+//		{
+//			Swap(start, i, nums);
+//			start++;
+//		}
+//	}
+
+	for (int i = high; i >= low; i--)
 	{
-		if(nums[i] < pivot)
+		if (nums[i] > pivot)
 		{
+			start--;
 			Swap(start, i, nums);
-			start++;
 		}
 	}
-	
+
 	Swap(start, high, nums);
 	return start;
 }
