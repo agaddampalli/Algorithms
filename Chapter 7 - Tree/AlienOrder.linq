@@ -2,7 +2,7 @@
 
 void Main()
 {
-	StrStr("mississippi", "issip").Dump();
+	StrStr("mississippi", "ippi").Dump();
 }
 
 public int StrStr(string haystack, string needle) 
@@ -12,38 +12,66 @@ public int StrStr(string haystack, string needle)
 		return 0;
 	}
 	
-	int i =0, j = i;
-	int index = 0;
-	bool isFound = false;
+	var lps = GenerateLPS(needle);
 	
-	while(i<haystack.Length)
+	lps.Dump();
+	
+	int j = 0, i = 0;
+	while (i < haystack.Length)
 	{
-		if(j > needle.Length)
+		while(j < needle.Length)
 		{
-			break;
-		}
-		
-		if(haystack[i] == needle[j])
-		{
-			if(!isFound)
+			if(haystack[i] == needle[j])
 			{
-				index = i;
+				j++;
 			}
-			isFound = true;
-			j++;
-			i++;
-		}
-		else if(isFound)
-		{
-			i--;
-			j = 0;
-			isFound = false;
-		}
-		else
-		{
+			else
+			{
+				if(j != 0)
+				{
+					j = lps[j - 1];
+					continue;
+				}
+			}
+			
+			if(j == needle.Length)
+			{
+				return i - j + 1;
+			}
+			
 			i++;
 		}
 	}
 	
-	return isFound && j == needle.Length ? index : -1;
+	return -1;
+}
+
+public int[] GenerateLPS(string input)
+{
+	var lps = new int[input.Length];
+	
+	int i = 1;
+	int j = 0;
+	
+	while(i < input.Length)
+	{
+		if(input[i] == input[j])
+		{
+			lps[i] = j+1;
+			i++;
+			j++;
+		}
+		else
+		{
+			if(j != 0)
+			{
+				j = lps[j-1];
+				continue;
+			}
+			
+			i++;
+		}
+	}
+	
+	return lps;
 }

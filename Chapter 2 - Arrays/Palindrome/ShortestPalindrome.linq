@@ -4,8 +4,8 @@ void Main()
 {
 	var array = new int[] {0, 1, 3};
 
-	ShortestPalindromeBruteForce("abac").Dump();
-	ShortestPalindromePointers("aababababababa").Dump();
+	ShortestPalindromeBruteForce("abcd").Dump();
+	ShortestPalindromePointers("aacecaaa").Dump();
 }
 
 public string ShortestPalindromeBruteForce(string s) 
