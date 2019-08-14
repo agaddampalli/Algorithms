@@ -22,24 +22,26 @@ public int[] GetMoviesOnFlight(int[] moviesDuration, int totalDuration)
 
 	int start = 0;
 	int end = moviesDuration.Length - 1;
-	var maxDuration = int.MinValue;
 	var maxDiff = int.MinValue;
 	
 	while(start < end)
 	{
 		var temp = moviesDuration[start] + moviesDuration[end];
-		
-		if(temp <= target)
+		if(temp == target)
 		{
 			var diff = Math.Abs(moviesDuration[start] - moviesDuration[end]);
-			if(maxDuration < temp || diff > maxDiff)
+			if(diff > maxDiff)
 			{
-				movie1 = moviesDuration[start];
-				movie2 = moviesDuration[end];
-				maxDuration = temp;
-				maxDiff = diff > maxDiff ? diff : maxDiff;
+				movie1 = start;
+				movie2 = end;
+				maxDiff = diff ;
 			}
 			
+			start++;
+			end--;
+		}
+		else if (temp < target)
+		{
 			start++;
 		}
 		else if (temp > target)

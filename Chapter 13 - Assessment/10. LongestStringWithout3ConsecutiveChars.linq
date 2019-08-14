@@ -67,8 +67,9 @@ public string ReorganizeString(MaxHeap maxHeap)
 			break;
 		}
 	}
+ output.ToString().Substring
 	
-	return output.ToString();
+	return output.Length;
 }
 
 public class Char

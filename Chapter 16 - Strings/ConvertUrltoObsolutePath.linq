@@ -2,7 +2,7 @@
 
 void Main()
 {
-	SimplifyPath("/home//foo/").Dump();
+	SimplifyPath("/a/../../b/../c//.//").Dump();
 }
 
 public string SimplifyPath(string path)
@@ -34,15 +34,16 @@ public string SimplifyPath(string path)
 		
 		stack.Push(element);
 	}
-	
+
 	var output = new StringBuilder();
+	output.Append("/");
 	while(stack.Count != 0)
 	{
-		output.Append(stack.Pop());
+		output.Insert(1,stack.Pop());
 		
 		if(stack.Count != 0)
 		{
-			output.Append("/");
+			output.Insert(1,"/");
 		}
 	}
 	

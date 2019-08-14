@@ -2,9 +2,10 @@
 
 void Main()
 {
-//	Generate(28).Dump();
-	
+	//	Generate(28).Dump();
+
 	GetRow(4).Dump();
+	Generate(28).Dump();
 }
 
 public IList<IList<int>> Generate(int numRows)
