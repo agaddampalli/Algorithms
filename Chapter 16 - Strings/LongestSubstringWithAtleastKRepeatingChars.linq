@@ -4,7 +4,7 @@ void Main()
 {
 	var s = "aaabb";
 	
-	LongestSubstringWithAtleastKRepeatingChars(s,3).Dump();
+	LongestSubstringWithAtleastKRepeatingChars(s,2).Dump();
 	maxSubString.Dump();
 }
 
