@@ -14,21 +14,21 @@ void Main()
 
 public int FindLowest(int[] nums, int k)
 {
-	
-	if( k < nums[0])
+
+	if (k < nums[0])
 	{
 		return -1;
 	}
 
-	if (k > nums[nums.Length -1])
+	if (k > nums[nums.Length - 1])
 	{
-		return nums[nums.Length -1];
+		return nums[nums.Length - 1];
 	}
-	
+
 	int left = 0;
 	int right = nums.Length;
-	var temp = (left + right)/2;
-	
+	var temp = (left + right) / 2;
+
 	while (left < right)
 	{
 		var mid = (left + right) / 2;
@@ -36,7 +36,7 @@ public int FindLowest(int[] nums, int k)
 
 		if (k <= val)
 		{
-			if(mid <= temp)
+			if (mid <= temp)
 			{
 				right = mid;
 			}
@@ -61,7 +61,7 @@ public int FindLowest(int[] nums, int k)
 	return nums[left % nums.Length];
 }
 
-public int FindLowestRange(int[] nums, int k)
+public int FindLowestRange(int[] nums, int target)
 {
 	int left = 0;
 	int right = nums.Length - 1;
@@ -71,36 +71,35 @@ public int FindLowestRange(int[] nums, int k)
 		var mid = (left + right) / 2;
 		var val = nums[mid];
 
-		if (k <= val)
+		if (nums[mid] < target)
 		{
-			right = mid;
+			left = mid + 1;
 		}
 		else
 		{
-			left = mid + 1;
+			right = mid;
 		}
 	}
 
 	return left;
 }
 
-public int FindHighestRange(int[] nums, int k)
+public int FindHighestRange(int[] nums, int target)
 {
-	int left = 0;
-	int right = nums.Length - 1;
+	var left = 0;
+	var right = nums.Length - 1;
 
 	while (left < right)
 	{
-		var mid = (left + right) / 2;
-		var val = nums[mid];
+		var mid = (left + right + 1) / 2;
 
-		if (k <= val)
+		if (nums[mid] <= target)
 		{
-			left = mid + 1;
+			left = mid;
 		}
 		else
 		{
-			right = mid;
+			right = mid - 1;
 		}
 	}
 
