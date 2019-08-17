@@ -2,8 +2,8 @@
 
 void Main()
 {
-	var s = "catsanddog";
-	var words = new List<string> { "cat", "cats", "and", "sand", "dog" };
+	var s = "aaaab";
+	var words = new List<string> { "a", "aa", "aaa", "aaaa"};
 
 	WordBreak(s, words).Dump();
 }
@@ -25,7 +25,7 @@ public void FindWordBreak(string s, HashSet<string> dict, int start, bool?[] mem
 		return;
 	}
 
-	if (memo[start] != null && memo[start].Value)
+	if (memo[start] != null)
 	{
 		return;
 	}

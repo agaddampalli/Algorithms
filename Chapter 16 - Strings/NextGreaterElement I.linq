@@ -3,7 +3,7 @@
 void Main()
 {
 	var nums1 = new int[] { 4,1,2 };
-	var nums2 = new int[] { 1, 3, 4, 2 };
+	var nums2 = new int[] { 1, 3, 4, 2 , 5 };
 
 	NextGreaterElement1(nums1, nums2).Dump();
 }
